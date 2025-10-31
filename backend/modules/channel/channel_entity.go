@@ -1,7 +1,9 @@
 package channel
 
+import "gorm.io/gorm"
+
 type ChannelEntity struct {
-	ID      string `json:"id" gorm:"primaryKey;type:uuid;default:gen_random_uuid()"`
+	gorm.Model
 	Nome    string `json:"nome" gorm:"type:varchar(255);not null"`
 	Url     string `json:"url" gorm:"type:varchar(255);not null"`
 	Youtube string `json:"youtube" gorm:"type:varchar(255);"`
