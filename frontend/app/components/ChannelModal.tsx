@@ -47,40 +47,40 @@ export function ChannelModal({
         <TextInput
           label="Name"
           placeholder="Channel Name"
-          {...form.getInputProps('nome')}
+          defaultValue={initialValues?.nome}
           required
         />
         <TextInput
           mt="sm"
           label="URL"
           placeholder="https://example.com"
-          {...form.getInputProps('url')}
+          defaultValue={initialValues?.url}
           required
         />
         <TextInput
           mt="sm"
           label="YouTube"
           placeholder="https://youtube.com/channel/..."
-          {...form.getInputProps('youtube')}
+          defaultValue={initialValues?.youtube}
         />
         <TextInput
           mt="sm"
           label="Tag"
           placeholder="Technology"
-          {...form.getInputProps('tag')}
+          defaultValue={initialValues?.tag}
           required
         />
         <TextInput
           mt="sm"
           label="Image URL"
           placeholder="https://example.com/image.png"
-          {...form.getInputProps('imagem')}
+          defaultValue={initialValues?.imagem!}
         />
         <TextInput
           mt="sm"
           label="Site"
           placeholder="https://example.com"
-          {...form.getInputProps('site')}
+          defaultValue={initialValues?.site}
           required
         />
         <Group justify="flex-end" mt="md">

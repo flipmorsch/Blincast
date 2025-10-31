@@ -39,7 +39,7 @@ export default function ChannelsPage() {
 
   const handleSubmit = (values: UpdateChannelDTO) => {
     if (selectedChannel) {
-      updateChannel(selectedChannel.ID, values)
+      updateChannel(selectedChannel.id, values)
     } else {
       createChannel(values)
     }
@@ -47,8 +47,8 @@ export default function ChannelsPage() {
   }
 
   const rows = channels.map(channel => (
-    <Table.Tr key={channel.ID}>
-      <Table.Td>{channel.ID}</Table.Td>
+    <Table.Tr key={channel.id}>
+      <Table.Td>{channel.id}</Table.Td>
       <Table.Td>{channel.nome}</Table.Td>
       <Table.Td>{channel.tag}</Table.Td>
       <Table.Td>{channel.url}</Table.Td>
@@ -63,7 +63,7 @@ export default function ChannelsPage() {
           <ActionIcon
             variant="subtle"
             color="red"
-            onClick={() => deleteChannel(channel.ID)}
+            onClick={() => deleteChannel(channel.id)}
           >
             <IconTrash size={16} />
           </ActionIcon>
