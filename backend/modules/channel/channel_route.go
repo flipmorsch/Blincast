@@ -16,4 +16,5 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 	channelRoutes.GET("/with-image", channelController.GetAllChannelsWithImage)
 	channelRoutes.GET("/:id", channelController.GetChannelByID)
 	channelRoutes.DELETE("/:id", channelController.DeleteChannel)
+	channelRoutes.PUT("/:id", channelController.UpdateChannel)
 }

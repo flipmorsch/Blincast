@@ -5,7 +5,7 @@ import "gorm.io/gorm"
 type ChannelRepository interface {
 	GetChannelByID(id string) (ChannelEntity, error)
 	CreateChannel(channel ChannelEntity) error
-	UpdateChannel(channel ChannelEntity) error
+	UpdateChannel(channel *ChannelEntity) error
 	DeleteChannel(id string) error
 	GetAllChannels() ([]ChannelEntity, error)
 	GetAllChannelsWithImage() ([]ChannelEntity, error)
@@ -41,8 +41,8 @@ func (c *channelRepository) GetChannelByID(id string) (ChannelEntity, error) {
 	return channel, err
 }
 
-func (c *channelRepository) UpdateChannel(channel ChannelEntity) error {
-	panic("unimplemented")
+func (c *channelRepository) UpdateChannel(channel *ChannelEntity) error {
+	return c.db.Save(channel).Error
 }
 
 func NewChannelRepository(db *gorm.DB) ChannelRepository {

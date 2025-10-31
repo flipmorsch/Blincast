@@ -83,7 +83,28 @@ func (c *channelController) GetChannelByID(ctx *gin.Context) {
 }
 
 func (c *channelController) UpdateChannel(ctx *gin.Context) {
-	panic("unimplemented")
+	id := ctx.Param("id")
+	var channel UpdateChannelDTO
+	if err := ctx.ShouldBindJSON(&channel); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := getValidator().Struct(&channel); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
+
+	if err := c.channelService.UpdateChannel(ctx, id, channel); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			ctx.JSON(404, gin.H{"error": "channel not found"})
+			return
+		}
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+
+	ctx.Status(204)
 }
 
 func NewChannelController(channelService ChannelService) ChannelController {
