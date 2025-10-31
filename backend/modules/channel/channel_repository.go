@@ -16,7 +16,7 @@ type channelRepository struct {
 }
 
 func (c *channelRepository) CreateChannel(channel ChannelEntity) error {
-	panic("unimplemented")
+	return c.db.Create(&channel).Error
 }
 
 func (c *channelRepository) DeleteChannel(id string) error {
