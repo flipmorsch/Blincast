@@ -40,7 +40,15 @@ func (c *channelController) CreateChannel(ctx *gin.Context) {
 }
 
 func (c *channelController) DeleteChannel(ctx *gin.Context) {
-	panic("unimplemented")
+	if err := c.channelService.DeleteChannel(ctx, ctx.Param("id")); err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			ctx.JSON(404, gin.H{"error": "channel not found"})
+			return
+		}
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.Status(204)
 }
 
 func (c *channelController) GetAllChannels(ctx *gin.Context) {

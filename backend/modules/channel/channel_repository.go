@@ -20,7 +20,7 @@ func (c *channelRepository) CreateChannel(channel ChannelEntity) error {
 }
 
 func (c *channelRepository) DeleteChannel(id string) error {
-	panic("unimplemented")
+	return c.db.Delete(&ChannelEntity{}, "id = ?", id).Error
 }
 
 func (c *channelRepository) GetAllChannels() ([]ChannelEntity, error) {
