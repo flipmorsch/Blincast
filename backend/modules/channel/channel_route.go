@@ -13,4 +13,5 @@ func RegisterRoutes(router *gin.Engine, db *gorm.DB) {
 	channelRoutes := router.Group("/channel")
 	channelRoutes.GET("", channelController.GetAllChannels)
 	channelRoutes.POST("/", channelController.CreateChannel)
+	channelRoutes.GET("/with-image", channelController.GetAllChannelsWithImage)
 }

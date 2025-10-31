@@ -31,7 +31,7 @@ func (c *channelRepository) GetAllChannels() ([]ChannelEntity, error) {
 
 func (c *channelRepository) GetAllChannelsWithImage() ([]ChannelEntity, error) {
 	var channels []ChannelEntity
-	err := c.db.Where("image IS NOT NULL").Find(&channels).Error
+	err := c.db.Where("imagem IS NOT NULL").Find(&channels).Error
 	return channels, err
 }
 

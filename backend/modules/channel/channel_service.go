@@ -6,10 +6,15 @@ type ChannelService interface {
 	GetChannelByID(ctx context.Context, id string) (*ChannelEntity, error)
 	CreateChannel(ctx context.Context, channel *ChannelEntity) error
 	GetAllChannels(ctx context.Context) ([]ChannelEntity, error)
+	GetAllChannelsWithImage(ctx context.Context) ([]ChannelEntity, error)
 }
 
 type channelService struct {
 	repo ChannelRepository
+}
+
+func (c *channelService) GetAllChannelsWithImage(ctx context.Context) ([]ChannelEntity, error) {
+	return c.repo.GetAllChannelsWithImage()
 }
 
 func (c *channelService) CreateChannel(ctx context.Context, channel *ChannelEntity) error {

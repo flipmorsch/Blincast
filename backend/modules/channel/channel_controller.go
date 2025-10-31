@@ -34,12 +34,10 @@ func (c *channelController) CreateChannel(ctx *gin.Context) {
 	ctx.Status(201)
 }
 
-// DeleteChannel implements ChannelController.
 func (c *channelController) DeleteChannel(ctx *gin.Context) {
 	panic("unimplemented")
 }
 
-// GetAllChannels implements ChannelController.
 func (c *channelController) GetAllChannels(ctx *gin.Context) {
 	channels, err := c.channelService.GetAllChannels(ctx)
 	if err != nil {
@@ -49,17 +47,19 @@ func (c *channelController) GetAllChannels(ctx *gin.Context) {
 	ctx.JSON(200, channels)
 }
 
-// GetAllChannelsWithImage implements ChannelController.
 func (c *channelController) GetAllChannelsWithImage(ctx *gin.Context) {
-	panic("unimplemented")
+	channels, err := c.channelService.GetAllChannelsWithImage(ctx)
+	if err != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(200, channels)
 }
 
-// GetChannelByID implements ChannelController.
 func (c *channelController) GetChannelByID(ctx *gin.Context) {
 	panic("unimplemented")
 }
 
-// UpdateChannel implements ChannelController.
 func (c *channelController) UpdateChannel(ctx *gin.Context) {
 	panic("unimplemented")
 }
