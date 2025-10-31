@@ -23,11 +23,15 @@ func (c *channelController) CreateChannel(ctx *gin.Context) {
 		ctx.JSON(400, gin.H{"error": err.Error()})
 		return
 	}
+	if err := ValidateChannelEntity(&channel); err != nil {
+		ctx.JSON(400, gin.H{"error": err.Error()})
+		return
+	}
 	if err := c.channelService.CreateChannel(ctx, &channel); err != nil {
 		ctx.JSON(500, gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(201, channel)
+	ctx.Status(201)
 }
 
 // DeleteChannel implements ChannelController.
@@ -37,7 +41,12 @@ func (c *channelController) DeleteChannel(ctx *gin.Context) {
 
 // GetAllChannels implements ChannelController.
 func (c *channelController) GetAllChannels(ctx *gin.Context) {
-	panic("unimplemented")
+	channels, err := c.channelService.GetAllChannels(ctx)
+	if err != nil {
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(200, channels)
 }
 
 // GetAllChannelsWithImage implements ChannelController.

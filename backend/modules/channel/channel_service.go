@@ -5,6 +5,7 @@ import "context"
 type ChannelService interface {
 	GetChannelByID(ctx context.Context, id string) (*ChannelEntity, error)
 	CreateChannel(ctx context.Context, channel *ChannelEntity) error
+	GetAllChannels(ctx context.Context) ([]ChannelEntity, error)
 }
 
 type channelService struct {
@@ -17,6 +18,10 @@ func (c *channelService) CreateChannel(ctx context.Context, channel *ChannelEnti
 
 func (c *channelService) GetChannelByID(ctx context.Context, id string) (*ChannelEntity, error) {
 	panic("unimplemented")
+}
+
+func (c *channelService) GetAllChannels(ctx context.Context) ([]ChannelEntity, error) {
+	return c.repo.GetAllChannels()
 }
 
 func NewChannelService(repo ChannelRepository) ChannelService {

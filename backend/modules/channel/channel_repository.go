@@ -24,11 +24,15 @@ func (c *channelRepository) DeleteChannel(id string) error {
 }
 
 func (c *channelRepository) GetAllChannels() ([]ChannelEntity, error) {
-	panic("unimplemented")
+	var channels []ChannelEntity
+	err := c.db.Find(&channels).Error
+	return channels, err
 }
 
 func (c *channelRepository) GetAllChannelsWithImage() ([]ChannelEntity, error) {
-	panic("unimplemented")
+	var channels []ChannelEntity
+	err := c.db.Where("image IS NOT NULL").Find(&channels).Error
+	return channels, err
 }
 
 func (c *channelRepository) GetChannelByID(id string) (ChannelEntity, error) {
