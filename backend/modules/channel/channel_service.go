@@ -99,6 +99,7 @@ func (c *channelService) GetAllChannels(ctx context.Context) (map[string]Channel
 	for _, channel := range channels {
 		if channel.Nome != nil {
 			info := ChannelInfoDTO{}
+			info.ID = channel.ID
 			if channel.Url != nil {
 				info.Url = *channel.Url
 			}

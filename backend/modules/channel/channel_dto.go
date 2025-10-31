@@ -10,6 +10,7 @@ type UpdateChannelDTO struct {
 }
 
 type ChannelInfoWithImageDTO struct {
+	ID      uint  `json:"id"`
 	Url     string  `json:"url"`
 	Youtube string  `json:"youtube"`
 	Tag     string  `json:"tag"`
@@ -18,8 +19,9 @@ type ChannelInfoWithImageDTO struct {
 }
 
 type ChannelInfoDTO struct {
-	Url     string  `json:"url"`
-	Youtube string  `json:"youtube"`
-	Tag     string  `json:"tag"`
-	Site    string  `json:"site"`
+	ID      uint `json:"id"`
+	Url     string `json:"url"`
+	Youtube string `json:"youtube"`
+	Tag     string `json:"tag"`
+	Site    string `json:"site"`
 }
