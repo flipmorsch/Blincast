@@ -3,7 +3,7 @@ package channel
 import "context"
 
 type ChannelService interface {
-	GetChannelByID(ctx context.Context, id string) (*ChannelEntity, error)
+	GetChannelByID(ctx context.Context, id string) (ChannelEntity, error)
 	CreateChannel(ctx context.Context, channel *ChannelEntity) error
 	GetAllChannels(ctx context.Context) ([]ChannelEntity, error)
 	GetAllChannelsWithImage(ctx context.Context) ([]ChannelEntity, error)
@@ -21,8 +21,8 @@ func (c *channelService) CreateChannel(ctx context.Context, channel *ChannelEnti
 	return c.repo.CreateChannel(*channel)
 }
 
-func (c *channelService) GetChannelByID(ctx context.Context, id string) (*ChannelEntity, error) {
-	panic("unimplemented")
+func (c *channelService) GetChannelByID(ctx context.Context, id string) (ChannelEntity, error) {
+	return c.repo.GetChannelByID(id)
 }
 
 func (c *channelService) GetAllChannels(ctx context.Context) ([]ChannelEntity, error) {

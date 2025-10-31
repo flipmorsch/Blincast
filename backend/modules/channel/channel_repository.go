@@ -36,7 +36,9 @@ func (c *channelRepository) GetAllChannelsWithImage() ([]ChannelEntity, error) {
 }
 
 func (c *channelRepository) GetChannelByID(id string) (ChannelEntity, error) {
-	panic("unimplemented")
+	var channel ChannelEntity
+	err := c.db.First(&channel, "id = ?", id).Error
+	return channel, err
 }
 
 func (c *channelRepository) UpdateChannel(channel ChannelEntity) error {

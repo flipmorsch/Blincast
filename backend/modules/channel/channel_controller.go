@@ -1,6 +1,11 @@
 package channel
 
-import "github.com/gin-gonic/gin"
+import (
+	"errors"
+
+	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
+)
 
 type (
 	ChannelController interface {
@@ -57,7 +62,16 @@ func (c *channelController) GetAllChannelsWithImage(ctx *gin.Context) {
 }
 
 func (c *channelController) GetChannelByID(ctx *gin.Context) {
-	panic("unimplemented")
+	channel, err := c.channelService.GetChannelByID(ctx, ctx.Param("id"))
+	if err != nil {
+		if errors.Is(err, gorm.ErrRecordNotFound) {
+			ctx.JSON(404, gin.H{"error": "channel not found"})
+			return
+		}
+		ctx.JSON(500, gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(200, channel)
 }
 
 func (c *channelController) UpdateChannel(ctx *gin.Context) {
