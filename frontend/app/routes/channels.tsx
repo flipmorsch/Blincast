@@ -22,6 +22,7 @@ export default function ChannelsPage() {
     updateChannel,
     deleteChannel,
     setOnlyWithImage,
+    onlyWithImage
   } = useChannels()
   const [modalOpened, {open: openModal, close: closeModal}] =
     useDisclosure(false)
@@ -53,7 +54,7 @@ export default function ChannelsPage() {
       <Table.Td>{channel.tag}</Table.Td>
       <Table.Td>{channel.url}</Table.Td>
       <Table.Td>{channel.youtube}</Table.Td>
-      <Table.Td>{channel.imagem}</Table.Td>
+      {onlyWithImage && <Table.Td>{channel.imagem}</Table.Td>}
       <Table.Td>{channel.site}</Table.Td>
       <Table.Td>
         <Group gap="xs">
@@ -94,7 +95,7 @@ export default function ChannelsPage() {
               <Table.Th>Tag</Table.Th>
               <Table.Th>URL</Table.Th>
               <Table.Th>YouTube</Table.Th>
-              <Table.Th>Image</Table.Th>
+              {onlyWithImage && <Table.Th>Image</Table.Th>}
               <Table.Th>Site</Table.Th>
               <Table.Th>Actions</Table.Th>
             </Table.Tr>
