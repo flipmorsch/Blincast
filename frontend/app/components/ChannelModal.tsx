@@ -2,6 +2,7 @@ import {useEffect} from 'react'
 import {Modal, Button, TextInput, Group, Box} from '@mantine/core'
 import {useForm} from '@mantine/form'
 import type {UpdateChannelDTO} from '../types/channel'
+import {isHttpUrl, isYouTubeUrl} from '~/utils/url'
 
 interface ChannelModalProps {
   opened: boolean
@@ -30,13 +31,15 @@ export function ChannelModal({
     validate: {
       nome: value => (value && value.length > 0 ? null : 'Name is required'),
       url: value =>
-        value && /^(ftp|http|https):\/\/[^ "]+$/.test(value)
-          ? null
-          : 'A valid URL is required',
+        value ? (isHttpUrl(value) ? null : 'A valid URL is required') : null,
       site: value =>
-        value && /^(ftp|http|https):\/\/[^ "]+$/.test(value)
+        value ? (isHttpUrl(value) ? null : 'A valid URL is required') : null,
+      youtube: value =>
+        isYouTubeUrl(value)
           ? null
-          : 'A valid URL is required',
+          : 'A valid YouTube URL is required',
+      imagem: value =>
+        !value || isHttpUrl(value) ? null : 'A valid Image URL is required',
       tag: value => (value && value.length > 0 ? null : 'Tag is required'),
     },
   })
