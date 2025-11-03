@@ -61,6 +61,7 @@ func (c *channelService) GetAllChannelsWithImage(ctx context.Context) (map[strin
 	for _, channel := range channels {
 		if channel.Nome != nil {
 			info := ChannelInfoWithImageDTO{}
+			info.ID = channel.ID
 			if channel.Url != nil {
 				info.Url = *channel.Url
 			}

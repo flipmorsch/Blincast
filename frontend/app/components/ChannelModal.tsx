@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import {useEffect} from 'react'
 import {Modal, Button, TextInput, Group, Box} from '@mantine/core'
 import {useForm} from '@mantine/form'
 import type {UpdateChannelDTO} from '../types/channel'
@@ -41,47 +41,62 @@ export function ChannelModal({
     },
   })
 
+  useEffect(() => {
+    if (opened) {
+      form.setValues(
+        initialValues || {
+          nome: '',
+          url: '',
+          youtube: '',
+          tag: '',
+          imagem: '',
+          site: '',
+        }
+      )
+      form.resetDirty()
+    }
+  }, [opened, initialValues])
+
   return (
     <Modal opened={opened} onClose={onClose} title={title}>
-      <Box component="form" onSubmit={form.onSubmit(onSubmit)}>
+      <Box
+        component="form"
+        onSubmit={form.onSubmit(values => onSubmit(values))}
+      >
         <TextInput
           label="Name"
           placeholder="Channel Name"
-          defaultValue={initialValues?.nome}
-          required
+          {...form.getInputProps('nome')}
         />
         <TextInput
           mt="sm"
           label="URL"
           placeholder="https://example.com"
-          defaultValue={initialValues?.url}
-          required
+          {...form.getInputProps('url')}
         />
         <TextInput
           mt="sm"
           label="YouTube"
           placeholder="https://youtube.com/channel/..."
-          defaultValue={initialValues?.youtube}
+          {...form.getInputProps('youtube')}
         />
         <TextInput
           mt="sm"
           label="Tag"
           placeholder="Technology"
-          defaultValue={initialValues?.tag}
-          required
+          {...form.getInputProps('tag')}
         />
         <TextInput
           mt="sm"
           label="Image URL"
           placeholder="https://example.com/image.png"
-          defaultValue={initialValues?.imagem!}
+          {...form.getInputProps('imagem')}
         />
         <TextInput
           mt="sm"
           label="Site"
           placeholder="https://example.com"
-          defaultValue={initialValues?.site}
-          required
+          {...form.getInputProps('site')}
         />
         <Group justify="flex-end" mt="md">
           <Button variant="default" onClick={onClose}>
